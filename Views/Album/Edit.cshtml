@@ -1,0 +1,49 @@
+﻿@model MircheeMusic.Models.AlbumModel
+
+@{
+    ViewBag.Title = "Edit Album Info";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <div>
+            <hr />
+            <p style="font-size:small">Album Information:</p>
+            <hr />
+            </div>
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group" style="font-size:xx-small">
+                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+
+            <div class="form-group" style="font-size:xx-small">
+                @Html.LabelFor(model => model.Genre, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Genre)
+                    @Html.ValidationMessageFor(model => model.Genre)
+                </div>
+            </div>
+        
+            <div class="form-group" style="font-size:xx-small">
+                <div class="col-md-offset-2 col-md-10 style=" font-size:x-small">
+                    <input type="submit" value="Save" class="btn btn-default" style="font-size:xx-small"></div>
+            </div>
+        </div>
+}
+
+<div style="font-size:xx-small">
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

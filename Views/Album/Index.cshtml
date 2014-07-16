@@ -1,0 +1,35 @@
+﻿@model List<MircheeMusic.Models.AlbumModel>
+
+@{
+    ViewBag.Title = "Music Albums";
+}
+
+<table class="table">
+
+@foreach (var item in Model)
+{
+    <tr style="font-size:xx-small">
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+    <tr style="font-size:x-small">
+        <td>@Html.ActionLink("Create New", "Create" )</td>
+        <td></td>
+        <td></td>
+    </tr>
+
+
+</table>
+
+
+

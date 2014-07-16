@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/jsapi"></script>
+    @*<script type="text/javascript" src="//www.accountchooser.com/client.js"></script>*@
+    <script type="text/javascript" src="//www.accountchooser.biz/client.js"></script>
+    <script type="text/javascript">
+        function load()
+        {
+            google.load("identitytoolkit", "2", {packages: ["ac"], language:"en", callback: callback});
+        }
+    </script>
+
+    <script type="text/javascript">
+        function callback() {
+            google.load("identitytoolkit", "2", {packages: ["ac"], language:"en", callback: callback});
+            window.google.identitytoolkit.setConfig({
+                developerKey: "964482664522-h7asjnmiigsvrbpuvoufuhqjvobcl16q",
+                companyName: "Mirchee Music",
+                callbackUrl: "https://www.mircheemusic.com/home/",
+                realm: "",
+                userStatusUrl: "https://www.mircheemusic.com/Account/Manage",
+                loginUrl: "https://www.mircheemusic.com/Account/Login",
+                signupUrl: "https://www.mircheemusic.com/Account/Register",
+                homeUrl: "https://www.mircheemusic.com/home/index",
+                logoutUrl: "https://www.mircheemusic.com/Account/LogOff",
+                idps: ["Gmail", "Yahoo", "AOL"],
+                tryFederatedFirst: true,
+                useContextParam: true,
+                language: "en"
+            });
+            window.google.identitytoolkit.init();
+        }
+    </script>
+    <script type="text/javascript" src="//apis.google.com/js/client.js?onload=load">
+          $('#navbar').accountChooser();
+         
+          @if (Request.IsAuthenticated)
+          {
+              var user = Session["GitAssertion"] as MirchrrMusic.GitKit.GitAssertion;
+              if(user != null)
+              {
+                  <text>
+                      var userData = {
+                          email: '@user.VerifiedEmail', // required
+                          displayName: '@user.FirstName', // optional
+                          photoUrl: 'https://account-chooser.appspot.com/image/nophoto.png' // optional
+                      };
+                 
+                  window.google.identitytoolkit.updateSavedAccount(userData);
+                  window.google.identitytoolkit.showSavedAccount(userData.email);
+                  </text>
+              }
+          }
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:gold">
+        <div class="container" >
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Mirchee Music Library", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="text-decoration-color:GrayText">
+        @RenderBody()
+        <hr />
+        <footer style="background-color:ButtonShadow">
+            <p style="font-size:xx-small">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

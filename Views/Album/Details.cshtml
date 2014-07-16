@@ -1,0 +1,33 @@
+﻿@model MircheeMusic.Models.AlbumModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<p style="font-size:small">Album Details:</p>
+
+<div>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt style="font-size:x-small">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd style="font-size:xx-small">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt style="font-size:x-small">
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd style="font-size:xx-small">
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+    </dl>
+</div>
+<p style="font-size:x-small">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

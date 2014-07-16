@@ -1,0 +1,47 @@
+﻿@model List<MircheeMusic.Models.Album>
+<html>
+<head><title>Music Albums</title></head>
+<body>
+    <div class="btn-info">Music Albums</div>
+
+
+        <table width="500" border="1" summary="List of music albums in store">
+            <tr style="font-size:x-small" background-color:ButtonShadow >
+                <td width="50"></td>
+                <td width="250">Album Name</td>
+                <td width="200">Genre</td>
+            </tr>
+
+            <tbody>
+                @foreach (MircheeMusic.Models.Album album in @Model)
+                {
+                    if (album.Id > 0)
+                    {
+                        <tr style="font-size:xx-small" >
+                            <td width ="50" >
+                                <a href="/album/Detail?Id=@album.Id" id="@album.Id">Detail</a>
+                                <a href="/album/Edit?Id=@album.Id" id="@album.Id">Edit</a>
+                            </td>
+                            <td width="250" align="left">@album.Name</td>
+                            <td width="200" align="left">@album.Genre</td>
+                        </tr>
+                    }
+
+                }
+                <tr style="font-size:xx-small" >
+                    <td width="50" align="left"><a href="/album/Add?Name=Test&Genre=test" id="btnSave" name="btnSave">Add New</a></td>
+                    <td width="250" align="left"><input id="AlbumName" name="Name" width="190" /></td>
+                    <td width="200" align="left"><input id="Genre" name="Genre" border="1" width="190" /></td>
+                </tr>
+            </tbody>
+        </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
